@@ -58,11 +58,11 @@ public class DeviceRegister extends HttpServlet {
             conn = DriverManager.getConnection(dburl, user, passwd);
             stmt = conn.createStatement();
             stmt.executeUpdate("use CarDevices");
-            rs = stmt.executeQuery("select * from " + model + " where uuid = \"" + uuid + "\"");
+            rs = stmt.executeQuery("select * from `" + model + "` where uuid = \"" + uuid + "\"");
             if (rs.next()) {
                 out.println("{\"result\": \"success\",\"message\": \"uuid " + uuid +" is already registered on " + rs.getString("created") +"\"}");
             }else {
-                stmt.execute("insert into " + model + " value(null, \""+uuid+"\", null)");
+                stmt.execute("insert into `" + model + "` value(null, \""+uuid+"\", null)");
                 out.println("{\"result\": \"success\",\"message\": \"register success\"}");
             }
             //long endTime=System.currentTimeMillis();
