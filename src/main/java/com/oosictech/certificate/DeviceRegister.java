@@ -31,6 +31,13 @@ public class DeviceRegister extends HttpServlet {
             throw new UnavailableException("Load database server error!");
         }
     }
+    public String getRemoteAddress(HttpServletRequest request){
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) ip = request.getHeader("Proxy-Client-IP");
+        if(ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) ip = request.getHeader("WL-Proxy-Client-IP");
+        if(ip == null || ip.length() == 0 || ip.equalsIgnoreCase("unknown")) ip = request.getRemoteAddr();
+        return ip;
+    }
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException,IOException
     {
@@ -62,7 +69,7 @@ public class DeviceRegister extends HttpServlet {
             if (rs.next()) {
                 out.println("{\"result\": \"success\",\"message\": \"uuid " + uuid +" is already registered on " + rs.getString("created") +"\"}");
             }else {
-                stmt.execute("insert into `" + model + "` value(null, \""+uuid+"\", null)");
+                stmt.execute("insert into `" + model + "` value(null, \""+uuid+"\", null, \"" + getRemoteAddress(req) + "\")");
                 out.println("{\"result\": \"success\",\"message\": \"register success\"}");
             }
             //long endTime=System.currentTimeMillis();
