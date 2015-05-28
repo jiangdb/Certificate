@@ -1,0 +1,156 @@
+html {
+    height:100%;
+}
+
+html,body{
+    padding: 0px;
+    margin: 0px;
+}
+
+form,body,ul,li{
+    margin: 0px;
+    padding: 0px;
+}
+ul,li{
+    list-style: none outside none;
+}
+.header{
+    top: 0px;
+    height: 75px;
+    font-size: 1em;
+    font-family: "lucia Grande", "Hiragino Sans GB", "Microsoft Yahei";
+    text-align: center;
+}
+#sepLineTd {
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    right: 0px;
+    height: 11px;
+}
+
+.topline {
+    width: auto;
+    border-left: 8px solid #ffffff;
+    height: 11px;
+    border-right: 8px solid #ffffff;
+    background: transparent url(../images/nav_bg.gif) repeat-x scroll 0px -115px;
+}
+
+.toplineimg {
+    width: 184px;
+    height: 22px;
+    background: transparent url(../images/topline.gif) repeat scroll -184px 0px;
+}
+
+.left {
+    float: left;
+}
+
+#leftPanel {
+    position: absolute;
+    top: 86px;
+    width: 179px;
+    left: 8px;
+    height: auto;
+}
+
+#nav_midbar {
+    bottom: 13px;
+    height: 850px;
+    overflow: hidden;
+    background: transparent url(../images/topline.gif) repeat-y scroll 0% 0%;
+}
+
+#nav_bottombar {
+    position: absolute;
+    bottom: 0px;
+    width: 179px;
+    height: 13px;
+    overflow: hidden;
+    background: transparent url(../images/topline.gif) no-repeat scroll -184px -11px;
+}
+
+.nav_menu{
+    margin-top: 20px;
+}
+.nav_menu a{
+    text-decoration: none;
+}
+
+li.model{
+    height: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+li.model:hover{
+    background-color: #b7e9ff;
+}
+
+li.model a:link, a:visited{
+    color: #0066FF;
+}
+
+#rightPanel {
+    position: absolute;
+    top: 86px;
+    left: 190px;
+    right: 8px;
+    height: auto;
+}
+.device_table {
+    border-collapse: collapse;
+    right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.device_table caption {
+    font-size:1.5em;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.device_table th,td{
+    border: 1px solid #198BD4;
+    width: 600px;
+    hegith: 30px;
+    padding:5px;
+}
+
+.device_table th
+{
+    font-size:1em;
+    text-align:center;
+    background-color:#0066FF;
+    color:#ffffff;
+}
+
+.device_table td{
+    font-size: 10px;
+    text-align: right;
+    color: #0081c1;
+}
+
+.page_foot{
+    float: right;
+    margin-right: 10px;
+    font-size: 1em;
+    color: #0081c1;
+}
+
+.page_foot a {
+    margin: 3px;
+}
+
+.symbol{
+    text-decoration: none;
+}
+
+.page_foot strong {
+    color: #0066FF;
+}
+
