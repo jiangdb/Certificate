@@ -64,10 +64,18 @@
 
   <div id="rightPanel">
       <div id="right_top">
+          <div id="left" class="div_inline">
+              <h2 class="div_inline table_header"><%=request.getAttribute("model")%>(Total: <%=request.getAttribute("totalcount")%>)</h2>
+          </div>
+          <div id="right" class="div_inline search">
+              <form class="div_inline" name="search" action="devices" method="get">
+                  <input name="search_string" type="text" style="width: 500px;" />
+                  <input type="submit" value="search"/>
+              </form>
+          </div>
+      </div>
+      <div id="right_mid">
           <table class="device_table">
-              <caption class="device_model">
-                  TC_TGLS05(Total: <%=request.getAttribute("totalcount")%>)
-              </caption>
               <tr>
                   <th class="device_id" style="width: 20px;">id</th>
                   <th class="device_uuid">uuid</th>
@@ -93,7 +101,7 @@
           <div class="page_foot">
               <%
                   Integer tp = (Integer)request.getAttribute("totalpage");
-                  if (tp > 0) {
+                  if (tp > 1) {
                       Integer curpg = (Integer) request.getAttribute("curpage");
                       int startpg = (curpg / 10) * 10 + 1;
                       int endpg = (startpg + 9) > tp ? tp : (startpg + 9);

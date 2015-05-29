@@ -22,12 +22,41 @@ public class Devices extends HttpServlet {
     private String dbuser;
     private String dbpasswd;
     private String driverClass;
+    private static String modellist[] = {
+            "TC_TGLS05",
+            "TC_TGLS05_KO",
+            "xxgd_res_2.0",
+            "xxgd_res_2.0_ko"
+    };
 
     public void init() throws ServletException {
         driverClass=getInitParameter("driverClass");
         dburl = getInitParameter("url");
         dbuser = getInitParameter("name");
         dbpasswd = getInitParameter("pass");
+    }
+
+    private void handleSearch(String search, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DeviceDao dao = new DeviceDao(dburl,dbuser,dbpasswd,driverClass);
+        List<Device> list = dao.getDevices(search);
+        int totalcount = list.size();
+
+        int pos;
+        String model = "unkown";
+        for (String s:modellist) {
+            pos = search.indexOf(s);
+            if (pos != -1) {
+                model = s;
+            }
+        }
+
+        request.setAttribute("totalpage", 1);
+        request.setAttribute("totalcount", totalcount);
+        request.setAttribute("curpage", 1);
+        request.setAttribute("model", model);
+        request.setAttribute("list", list);
+        RequestDispatcher rd = request.getRequestDispatcher("devicelist.jsp");
+        rd.forward(request,response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +79,15 @@ public class Devices extends HttpServlet {
         if (pagenum == null || pagenum.equals("")) {
             pagenum = "1";
         }
-        DeviceDao dao = new DeviceDao(dburl,dbuser,dbpasswd,driverClass);
+
+        //check if it is search
+        String search = request.getParameter("search_string");
+        if (search!=null && !"".equals(search)) {
+            handleSearch(search, request, response);
+            return;
+        }
+
+        DeviceDao dao = new DeviceDao(dburl, dbuser,dbpasswd,driverClass);
         int totalcount = dao.getDevicesCount(model);
         int totalpage = totalcount/ROW_PER_PAGE;
         if (totalcount % ROW_PER_PAGE != 0) {

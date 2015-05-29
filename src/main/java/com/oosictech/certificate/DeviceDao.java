@@ -115,4 +115,56 @@ public class DeviceDao {
 
         return list;
     }
+
+    public List<Device> getDevices(String sql) {
+        if (sql == null || sql.equals("")) {
+            return null;
+        }
+
+        List<Device> list = new ArrayList<Device>();
+
+        Connection conn=null;
+        Statement stmt=null;
+        ResultSet rs=null;
+
+        try {
+            Class.forName(driverClass);
+        }
+        catch (ClassNotFoundException ce){
+            ce.printStackTrace();
+        }
+        try {
+            conn = DriverManager.getConnection(dburl, user, passwd);
+            stmt = conn.createStatement();
+            stmt.executeUpdate("use CarDevices");
+            rs = stmt.executeQuery(sql);
+
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String uuid = rs.getString("uuid");
+                Date createTime = rs.getDate("created");
+                String createIp = rs.getString("ip");
+                Device d = new Device(id, uuid, createIp,createTime);
+                list.add(d);
+            }
+        } catch (SQLException se){
+            se.printStackTrace();
+        }finally {
+            try {
+                if (stmt!=null){
+                    stmt.close();
+                }
+                if (rs!=null){
+                    rs.close();
+                }
+                if (conn!=null){
+                    conn.close();
+                }
+            }catch (SQLException se){
+                se.printStackTrace();
+            }
+        }
+
+        return list;
+    }
 }
