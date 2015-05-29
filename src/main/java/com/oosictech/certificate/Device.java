@@ -1,6 +1,9 @@
 package com.oosictech.certificate;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by Home on 2015/5/25.
@@ -9,14 +12,15 @@ public class Device {
     private int id;
     private String uuid;
     private String createIp;
-    private Date createTime;
+    private String createTime;
 
-    public Device(int id, String uuid, String createIp, Date createTime) {
+    public Device(int id, String uuid, String createIp, Timestamp createTime) {
         super();
         this.id = id;
         this.uuid = uuid;
         this.createIp = createIp;
-        this.createTime = createTime;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.createTime = df.format(createTime);
     }
     public int getId(){
         return id;
@@ -42,11 +46,12 @@ public class Device {
         this.createIp = ip;
     }
 
-    public Date getCreateTime(){
+    public String getCreateTime(){
         return createTime;
     }
 
-    public void setCreateTime(Date createTime){
-        this.createTime = createTime;
+    public void setCreateTime(Timestamp createTime){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        this.createTime = df.format(createTime);
     }
 }

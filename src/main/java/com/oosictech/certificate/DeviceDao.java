@@ -90,7 +90,7 @@ public class DeviceDao {
             while(rs.next()){
                 int id = rs.getInt("id");
                 String uuid = rs.getString("uuid");
-                Date createTime = rs.getDate("created");
+                Timestamp createTime = rs.getTimestamp("created");
                 String createIp = rs.getString("ip");
                 Device d = new Device(id, uuid, createIp,createTime);
                 list.add(d);
@@ -142,7 +142,7 @@ public class DeviceDao {
             while(rs.next()){
                 int id = rs.getInt("id");
                 String uuid = rs.getString("uuid");
-                Date createTime = rs.getDate("created");
+                Timestamp createTime = rs.getTimestamp("created");
                 String createIp = rs.getString("ip");
                 Device d = new Device(id, uuid, createIp,createTime);
                 list.add(d);
